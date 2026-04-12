@@ -17,59 +17,40 @@
             <h1 class="text-4xl font-black italic uppercase text-slate-900 leading-none tracking-tighter">
                 The Legacy <span class="text-blue-600 text-5xl block">Reset 2026</span>
             </h1>
-            <p class="text-slate-500 mt-2 font-bold uppercase tracking-wide text-sm">Reunion RSVP</p>
+            <p class="text-slate-500 mt-2 font-bold uppercase tracking-wide text-sm">Class Reunion RSVP</p>
         </div>
 
         <form id="reunionForm" class="space-y-4">
-            <input type="text" name="name" placeholder="Full Name" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
-            
-            <input type="email" name="email" placeholder="Email Address" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
-
-            <input type="tel" name="phone" placeholder="Phone Number" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
+            <input type="text" name="name" placeholder="Full Name" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
+            <input type="email" name="email" placeholder="Email Address" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
+            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
             <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Attending?</label>
-                    <select name="attendance" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
-                        <option value="" disabled selected>Select...</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">+ Guest?</label>
-                    <select name="partner" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
-                        <option value="Solo">Solo</option>
-                        <option value="Plus One">+1 Guest</option>
-                    </select>
-                </div>
+                <select name="attendance" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none">
+                    <option value="" disabled selected>Attending?</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <select name="partner" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none">
+                    <option value="Solo">Solo</option>
+                    <option value="Plus One">+1 Guest</option>
+                </select>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Hotel Needed?</label>
-                    <select name="hotel" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Suit Needed?</label>
-                    <select name="suit" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
-                        <option value="Own">Have Own</option>
-                        <option value="Need">Need One</option>
-                    </select>
-                </div>
+                <select name="hotel" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none">
+                    <option value="No">Hotel: Not Needed</option>
+                    <option value="Yes">Hotel: Required</option>
+                </select>
+                <select name="suit" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none">
+                    <option value="Own">Suit: Have My Own</option>
+                    <option value="Need">Suit: Need One</option>
+                </select>
             </div>
 
-            <textarea name="comments" rows="2" placeholder="Drink preferences or special requests..." 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none"></textarea>
+            <textarea name="comments" rows="3" placeholder="Roommate preferences, drink choice (beer/whisky), or other requests..." class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none"></textarea>
 
-            <button type="submit" id="submitBtn" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all shadow-lg active:scale-95">
+            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all shadow-lg active:scale-95">
                 Confirm RSVP
             </button>
         </form>
@@ -78,7 +59,7 @@
     </div>
 
     <script>
-        // Use Deployment Version 6 URL
+        // Deployment Version 6 URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         
         const form = document.getElementById('reunionForm');
@@ -92,14 +73,14 @@
             
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    status.innerText = "✅ RSVP Successful! See you in 2026.";
+                    status.innerText = "✅ RSVP Successful! See you there.";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
                     status.classList.remove('hidden');
                     form.reset();
                     btn.innerText = "Done";
                 })
                 .catch(error => {
-                    console.error('Submission Error:', error);
+                    console.error('Error!', error.message);
                     status.innerText = "Something went wrong. Please try again.";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
                     status.classList.remove('hidden');
@@ -109,4 +90,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

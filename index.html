@@ -89,7 +89,7 @@
     </div>
 
     <script>
-        // Verified Web App URL from Deployment Version 5
+        // Version 5 Web App URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         const CLASS_SECRET = "95/97"; 
 
@@ -101,7 +101,7 @@
             e.preventDefault();
             
             if (document.getElementById('accessSecret').value !== CLASS_SECRET) {
-                alert("❌ Invalid Class Secret. Please check your year group.");
+                alert("❌ Invalid Class Secret.");
                 return;
             }
 

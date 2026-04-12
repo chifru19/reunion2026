@@ -3,51 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reunion 2026 | Registration</title>
+    <title>The Legacy Reset | 95/97 Reunion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen flex items-center justify-center p-4">
+<body class="bg-slate-950 min-h-screen flex items-center justify-center p-4 py-12">
 
-    <div class="max-w-md w-full bg-white rounded-[2.5rem] p-8 shadow-2xl relative">
-        <div class="mb-8">
-            <h1 class="text-4xl font-black italic uppercase text-slate-900 leading-none">
-                Reunion <span class="text-blue-600">2026</span>
+    <div class="max-w-lg w-full bg-white rounded-[2.5rem] p-8 shadow-2xl relative">
+        <div class="mb-8 text-center md:text-left">
+            <h1 class="text-4xl font-black italic uppercase text-slate-900 leading-none tracking-tighter">
+                The Legacy <span class="text-blue-600 text-5xl block">Reset 2026</span>
             </h1>
-            <p class="text-slate-500 mt-2 font-medium">Class of 95/97 Registration</p>
+            <p class="text-slate-500 mt-2 font-medium">Class of 95/97 Official Registration</p>
         </div>
 
         <form id="reunionForm" class="space-y-4">
             <div>
                 <label class="text-xs font-bold uppercase text-slate-400 ml-1">Class Secret</label>
-                <input type="password" id="accessSecret" placeholder="Enter Class Secret" required 
-                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none transition-all font-mono text-lg text-center">
+                <input type="password" id="accessSecret" placeholder="••••" required 
+                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none text-center font-mono">
             </div>
 
-            <hr class="border-slate-100 my-4">
+            <hr class="border-slate-100 my-2">
 
             <input type="text" name="name" placeholder="Full Name" required 
                 class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
-            <input type="email" name="email" placeholder="Email Address" required 
+            <input type="email" name="Email" placeholder="Email Address" required 
+                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
+
+            <input type="tel" name="Phone" placeholder="Phone Number (e.g. +49...)" required 
                 class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
-            <div>
-                <label class="text-xs font-bold uppercase text-slate-400 ml-1">Will you attend?</label>
-                <select name="attendance" required 
-                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Yes">Yes, I'll be there!</option>
-                    <option value="No">No, I can't make it</option>
-                    <option value="Maybe">Maybe / Not sure yet</option>
-                </select>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Attendance</label>
+                    <select name="Attendance" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
+                        <option value="" disabled selected>Select...</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Maybe">Maybe</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Partner?</label>
+                    <select name="partner" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
+                        <option value="No Guest">Solo</option>
+                        <option value="Bringing Guest">+1 Guest</option>
+                    </select>
+                </div>
             </div>
 
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Hotel</label>
+                    <select name="hotel" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
+                        <option value="None">None</option>
+                        <option value="Needed">Need Room</option>
+                        <option value="Shared">Shared</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase text-slate-400 ml-1">Suit</label>
+                    <select name="suit" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
+                        <option value="Own">Own Suit</option>
+                        <option value="Needed">Need Suit</option>
+                        <option value="Shared">Shared</option>
+                    </select>
+                </div>
+            </div>
+
+            <textarea name="comments" rows="2" placeholder="Drinks or other requests..." 
+                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none"></textarea>
+
             <button type="submit" id="submitBtn" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all transform active:scale-95 shadow-lg shadow-blue-200 mt-4">
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all shadow-lg active:scale-95">
                 Confirm RSVP
             </button>
         </form>
@@ -56,6 +89,7 @@
     </div>
 
     <script>
+        // REPLACE THIS URL with your new Deployment URL from Apps Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwvVqfj74mZ01REtUqIimfGGBpg_yGByyAg-BfeVhDj5LgR8EFZboDGCBN4GT6NNp1L/exec';
         const CLASS_SECRET = "95/97"; 
 
@@ -71,20 +105,20 @@
             }
 
             btn.disabled = true;
-            btn.innerText = "Processing...";
+            btn.innerText = "Syncing...";
             status.classList.remove('hidden');
             status.innerText = "Sending your RSVP...";
             status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-blue-50 text-blue-600";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    status.innerText = "✅ Success! Your RSVP is saved.";
+                    status.innerText = "✅ RSVP Confirmed!";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
                     form.reset();
                     btn.innerText = "Done";
                 })
                 .catch(error => {
-                    status.innerText = "Oops! Something went wrong.";
+                    status.innerText = "Connection error. Try again.";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
                     btn.disabled = false;
                     btn.innerText = "Try Again";
@@ -92,4 +126,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

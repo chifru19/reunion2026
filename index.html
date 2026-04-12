@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legacy Reset 2026 | RSVP</title>
+    <title>The Legacy Reset 2026 | RSVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -89,8 +89,8 @@
     </div>
 
     <script>
-        // Make sure you have your latest deployment URL here
-        const scriptURL = 'PASTE_YOUR_NEW_LINK_HERE';
+        // Use the new Web App URL from your Version 4 deployment screenshot
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         const CLASS_SECRET = "95/97"; 
 
         const form = document.getElementById('reunionForm');
@@ -99,26 +99,29 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            
+            // Basic secret check
             if (document.getElementById('accessSecret').value !== CLASS_SECRET) {
-                alert("❌ Invalid Secret.");
+                alert("❌ Invalid Class Secret. Please check your year group.");
                 return;
             }
 
             btn.disabled = true;
             btn.innerText = "Processing...";
             status.classList.remove('hidden');
-            status.innerText = "Sending your RSVP...";
+            status.innerText = "Sending your RSVP to the team...";
             status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-blue-50 text-blue-600";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    status.innerText = "✅ RSVP Successful!";
+                    status.innerText = "✅ RSVP Successful! See you in 2026.";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
                     form.reset();
                     btn.innerText = "Done";
                 })
                 .catch(error => {
-                    status.innerText = "Error. Please try again.";
+                    console.error('Error!', error.message);
+                    status.innerText = "Something went wrong. Please try again.";
                     status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
                     btn.disabled = false;
                     btn.innerText = "Try Again";
@@ -126,4 +129,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

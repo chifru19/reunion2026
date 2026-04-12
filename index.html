@@ -89,7 +89,7 @@
     </div>
 
     <script>
-        // Updated Web App URL from your Version 4 deployment screenshot
+        // Updated Web App URL from Version 5 deployment
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         const CLASS_SECRET = "95/97"; 
 
@@ -100,7 +100,6 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // Password protection logic
             if (document.getElementById('accessSecret').value !== CLASS_SECRET) {
                 alert("❌ Invalid Class Secret. Please check your year group.");
                 return;
@@ -113,11 +112,16 @@
             status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-blue-50 text-blue-600";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    status.innerText = "✅ RSVP Successful! See you in 2026.";
-                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
-                    form.reset();
-                    btn.innerText = "Done";
+                .then(response => response.json())
+                .then(data => {
+                    if(data.result === 'success') {
+                        status.innerText = "✅ RSVP Successful! See you in 2026.";
+                        status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
+                        form.reset();
+                        btn.innerText = "Done";
+                    } else {
+                        throw new Error(data.error);
+                    }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);

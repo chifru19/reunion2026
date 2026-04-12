@@ -32,16 +32,16 @@
             <input type="text" name="name" placeholder="Full Name" required 
                 class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
-            <input type="email" name="Email" placeholder="Email Address" required 
+            <input type="email" name="email" placeholder="Email Address" required 
                 class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
 
-            <input type="tel" name="Phone" placeholder="Phone Number" required 
+            <input type="tel" name="phone" placeholder="Phone Number" required 
                 class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="text-xs font-bold uppercase text-slate-400 ml-1">Attending?</label>
-                    <select name="Attendance" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
+                    <select name="attendance" required class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none appearance-none mt-1">
                         <option value="" disabled selected>Select...</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -89,7 +89,7 @@
     </div>
 
     <script>
-        // Updated Web App URL from Version 5 deployment
+        // Verified Web App URL from Deployment Version 5
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         const CLASS_SECRET = "95/97"; 
 
@@ -108,20 +108,15 @@
             btn.disabled = true;
             btn.innerText = "Processing...";
             status.classList.remove('hidden');
-            status.innerText = "Sending your RSVP to the team...";
+            status.innerText = "Sending your RSVP...";
             status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-blue-50 text-blue-600";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => response.json())
-                .then(data => {
-                    if(data.result === 'success') {
-                        status.innerText = "✅ RSVP Successful! See you in 2026.";
-                        status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
-                        form.reset();
-                        btn.innerText = "Done";
-                    } else {
-                        throw new Error(data.error);
-                    }
+                .then(response => {
+                    status.innerText = "✅ RSVP Successful! See you in 2026.";
+                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
+                    form.reset();
+                    btn.innerText = "Done";
                 })
                 .catch(error => {
                     console.error('Error!', error.message);

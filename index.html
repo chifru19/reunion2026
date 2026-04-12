@@ -89,7 +89,7 @@
     </div>
 
     <script>
-        // Use the new Web App URL from your Version 4 deployment screenshot
+        // Updated Web App URL from your Version 4 deployment screenshot
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
         const CLASS_SECRET = "95/97"; 
 
@@ -100,7 +100,7 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // Basic secret check
+            // Password protection logic
             if (document.getElementById('accessSecret').value !== CLASS_SECRET) {
                 alert("❌ Invalid Class Secret. Please check your year group.");
                 return;

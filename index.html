@@ -63,7 +63,8 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcTVOiBX_IMHCooOx-bRBRIs5AxyWazLynwbRqydBlPhADA-Sfon/exec';
+        // Updated with your Version 7 URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wCtVOiBX_lMHCoOx-bRBRIs5AxYwaZLynwbRqydBlPhADA-Sfon/exec';
         const form = document.getElementById('reunionForm');
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('status');
@@ -84,10 +85,11 @@
                 status.classList.remove('hidden');
                 form.reset();
                 btn.innerText = "Done";
+                btn.disabled = false;
             })
             .catch(error => {
-                console.error('Submission error:', error);
-                status.innerText = "Something went wrong. Please try again.";
+                console.error('Error!', error.message);
+                status.innerText = "Error. Please try again.";
                 status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
                 status.classList.remove('hidden');
                 btn.disabled = false;

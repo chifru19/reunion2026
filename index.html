@@ -12,32 +12,83 @@
 </head>
 <body class="bg-slate-950 min-h-screen flex items-center justify-center p-4">
 
-    <div class="max-w-md w-full bg-white rounded-[2.5rem] p-8 shadow-2xl overflow-hidden relative">
+    <div class="max-w-md w-full bg-white rounded-[2.5rem] p-8 shadow-2xl relative">
         
         <div class="mb-8">
             <h1 class="text-4xl font-black italic uppercase text-slate-900 leading-none">
                 Reunion <span class="text-blue-600">2026</span>
             </h1>
-            <p class="text-slate-500 mt-2 font-medium">Please verify and register below.</p>
+            <p class="text-slate-500 mt-2 font-medium">Class of 95/97 Registration</p>
         </div>
 
         <form id="reunionForm" class="space-y-4">
             <div>
                 <label class="text-xs font-bold uppercase text-slate-400 ml-1">Class Secret</label>
-                <input type="password" id="secretCode" placeholder="••••" required 
+                <input type="password" id="secretCode" placeholder="Enter Pin" required 
                     class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none transition-all font-mono text-lg">
             </div>
 
             <hr class="border-slate-100 my-4">
 
             <input type="text" name="name" placeholder="Full Name" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none transition-all">
+                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
             <input type="email" name="email" placeholder="Email Address" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none transition-all">
+                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
             
             <input type="tel" name="phone" placeholder="Phone Number" required 
-                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none transition-all">
+                class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl focus:border-blue-600 outline-none">
 
             <button type="submit" id="submitBtn" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl uppercase tracking-widest transition-all transform active:scale-95 shadow-lg shadow-blue-200 mt-4">
+                Confirm Attendance
+            </button>
+        </form>
+
+        <div id="status" class="hidden mt-6 text-center p-4 rounded-2xl font-bold"></div>
+    </div>
+
+    <script>
+        // BACKEND CONFIGURATION
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwvVqfj74mZ01REtUqIimfGGBpg_yGByyAg-BfeVhDj5LgR8EFZboDGCBN4GT6NNp1L/exec';
+        const ACCESS_PIN = "95/97"; 
+
+        const form = document.getElementById('reunionForm');
+        const btn = document.getElementById('submitBtn');
+        const status = document.getElementById('status');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // Check Secret Pin
+            const enteredPin = document.getElementById('secretCode').value;
+            if (enteredPin !== ACCESS_PIN) {
+                alert("❌ Invalid Pin. Please use the secret shared in the group chat.");
+                return;
+            }
+
+            // Start Submission
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+            status.classList.remove('hidden');
+            status.innerText = "Sending your registration...";
+            status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-blue-50 text-blue-600";
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    status.innerText = "✅ Success! See you at the reunion.";
+                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
+                    form.reset();
+                    btn.innerText = "Done";
+                })
+                .catch(error => {
+                    console.error('Submission Error!', error.message);
+                    status.innerText = "Oops! Something went wrong.";
+                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
+                    btn.disabled = false;
+                    btn.innerText = "Try Again";
+                });
+        });
+    </script>
+</body>
+</html>

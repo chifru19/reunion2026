@@ -18,7 +18,7 @@
                 Class Reunion <span class="text-blue-600 text-5xl block">RSVP</span>
             </h1>
             <div class="mt-4 inline-flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100">
-                📍 Secrete 95/97
+                📍 Secret 95/97
             </div>
         </div>
 
@@ -73,21 +73,26 @@
             btn.disabled = true;
             btn.innerText = "Processing...";
             
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    status.innerText = "✅ RSVP Successful!";
-                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
-                    status.classList.remove('hidden');
-                    form.reset();
-                    btn.innerText = "Done";
-                })
-                .catch(error => {
-                    status.innerText = "Something went wrong. Please try again.";
-                    status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
-                    status.classList.remove('hidden');
-                    btn.disabled = false;
-                    btn.innerText = "Try Again";
-                });
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                body: new FormData(form)
+            })
+            .then(() => {
+                status.innerText = "✅ RSVP Successful!";
+                status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-green-50 text-green-600";
+                status.classList.remove('hidden');
+                form.reset();
+                btn.innerText = "Done";
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                status.innerText = "Something went wrong. Please try again.";
+                status.className = "mt-6 text-center p-4 rounded-2xl font-bold bg-red-50 text-red-600";
+                status.classList.remove('hidden');
+                btn.disabled = false;
+                btn.innerText = "Try Again";
+            });
         });
     </script>
 </body>

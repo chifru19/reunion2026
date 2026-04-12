@@ -42,4 +42,3 @@ I documented the full troubleshooting journey of this project on LinkedIn. You c
 
 **Lead Engineer:** Frank Fru  
 **Role:** SOC Analyst / DevSecOps Engineer
- 4ead2d2adcfd44b2c0753074f168e093acd0e562

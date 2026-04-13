@@ -19,25 +19,24 @@
             border-radius: 32px;
             width: 100%;
             max-width: 450px;
-            /* overflow-hidden keeps the image corners rounded to match the card */
-            overflow: hidden; 
+            overflow: hidden; /* This crops the image to the card's rounded corners */
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .header-image {
+        .header-banner {
             width: 100%;
-            height: auto;
             display: block;
+            object-fit: cover; /* Ensures the banner fills the space nicely */
         }
 
         .form-content {
-            padding: 1.5rem 2rem 2rem 2rem;
+            padding: 1.5rem 1.5rem 2rem 1.5rem;
         }
 
         .input-card {
             background: #f8fafc;
             border-radius: 16px;
-            padding: 1rem 1.25rem;
+            padding: 0.8rem 1rem;
             margin-bottom: 0.75rem;
             border: 1px solid #e2e8f0;
         }
@@ -46,18 +45,17 @@
             background: #fffbeb;
             border: 1px solid #fef3c7;
             border-radius: 16px;
-            padding: 1.25rem;
+            padding: 1rem;
             margin-bottom: 1rem;
         }
 
         .label-text {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #64748b;
             display: block;
-            margin-bottom: 2px;
         }
 
         select, textarea {
@@ -68,6 +66,7 @@
             font-weight: 600;
             color: #1e293b;
             border: none;
+            padding-top: 2px;
         }
 
         .done-btn {
@@ -86,15 +85,13 @@
         .done-btn:disabled { background-color: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 py-8">
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
     <div class="form-container">
         
-        <img src="images/logo.png" alt="CCAST 95/97 Reunion" class="header-image">
+        <img src="images/logo.png" alt="CCAST 95/97 Reunion" class="header-banner">
 
         <div class="form-content">
-            <h1 class="text-center text-xl font-black text-blue-900 uppercase tracking-tight mb-6">30th Anniversary RSVP</h1>
-
             <form id="rsvp-form">
                 <div class="flex gap-3">
                     <div class="input-card flex-1">
@@ -126,4 +123,62 @@
                 <div class="input-card">
                     <label class="label-text">Dietary Restrictions</label>
                     <select name="diet">
-                        <option value="None">No Dietary Restrictions</option
+                        <option value="None">No Dietary Restrictions</option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="No Fish">No Fish</option>
+                        <option value="Vegan">Vegan</option>
+                    </select>
+                </div>
+
+                <div class="note-box">
+                    <p class="text-[10px] font-black uppercase text-amber-700 mb-1 tracking-wider">⚠️ Note on Drinks</p>
+                    <p class="text-[11px] text-amber-900 leading-relaxed">
+                        Water, soft drinks, and <b>Beer</b> are provided. Please bring your own <b>Whiskey or Wine</b> if you wish.
+                    </p>
+                </div>
+
+                <div class="input-card">
+                    <textarea name="drink_pref" rows="2" placeholder="Drink preferences?"></textarea>
+                </div>
+
+                <div class="input-card">
+                    <textarea name="allergies" rows="2" placeholder="Allergies or questions?"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="done-btn shadow-lg">DONE</button>
+                
+                <div id="successMsg" class="hidden mt-4 bg-green-50 border border-green-100 text-green-600 rounded-2xl py-4 flex items-center justify-center gap-2 font-bold text-sm">
+                    ✅ RSVP Successful!
+                </div>
+            </form>
+
+            <p class="text-center text-[9px] text-gray-400 mt-8 uppercase font-bold tracking-widest italic">Engineered by Frank Fru</p>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wCtVOiBX_IMHCoOx-brBRIs5AxyYwaZLynwbRqdBlPhADAM_q0I/exec'
+        const form = document.getElementById('rsvp-form')
+        const btn = document.getElementById('submitBtn')
+        const success = document.getElementById('successMsg')
+
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          btn.disabled = true
+          btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> SAVING...'
+          
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                btn.classList.add('hidden')
+                success.classList.remove('hidden')
+                form.reset()
+            })
+            .catch(error => {
+                btn.disabled = false
+                btn.innerHTML = 'DONE'
+                alert('Submission failed. Check your internet or script URL.')
+            })
+        })
+    </script>
+</body>
+</html>

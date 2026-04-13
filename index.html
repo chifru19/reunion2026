@@ -5,37 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCAST 95/97 Reunion RSVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
         
         body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #f1f5f9; 
-            color: #1e293b; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
         }
 
-        .card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        .form-container {
+            background-color: white;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .input-group {
+        .input-card {
             background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 12px;
         }
 
-        .label-style {
-            font-size: 10px;
+        .note-box {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .label-text {
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #64748b;
-            margin-bottom: 4px;
             display: block;
+            margin-bottom: 2px;
         }
 
         select, textarea {
@@ -44,52 +55,47 @@
             outline: none;
             font-size: 16px;
             font-weight: 600;
-            color: #0f172a;
+            color: #1e293b;
+            border: none;
         }
 
-        .warning-box {
-            background: #fffbeb;
-            border: 1px solid #fef3c7;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .done-button {
-            background-color: #1d4ed8;
+        .done-btn {
+            background-color: #2563eb;
             color: white;
             font-weight: 800;
-            padding: 18px;
-            border-radius: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1.25rem;
+            border-radius: 18px;
             width: 100%;
             transition: all 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
-        .done-button:active { transform: scale(0.97); }
+        .done-btn:active { transform: scale(0.98); }
+        .done-btn:disabled { background-color: #94a3b8; cursor: not-allowed; }
     </style>
 </head>
-<body class="flex justify-center items-start min-h-screen py-8 px-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 py-12">
 
-    <div class="card w-full max-w-md p-6">
+    <div class="form-container">
         
-        <div class="text-center mb-8">
-            <img src="images/logo.png" alt="CCAST 95/97" class="w-32 mx-auto mb-4">
-            <h1 class="text-2xl font-extrabold text-blue-900 uppercase tracking-tight">30th Anniversary</h1>
-            <p class="text-slate-500 font-semibold text-sm">Class Reunion RSVP</p>
+        <div class="flex justify-center mb-6">
+            <img src="images/logo.png" alt="CCAST 95/97 Logo" class="w-40 h-auto object-contain">
         </div>
 
-        <form id="rsvpForm">
-            <div class="grid grid-cols-2 gap-3">
-                <div class="input-group">
-                    <label class="label-style">Attending?</label>
+        <form id="rsvp-form">
+            <div class="flex gap-3">
+                <div class="input-card flex-1">
+                    <label class="label-text">Attending?</label>
                     <select name="attendance" required>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                         <option value="Maybe">Maybe</option>
                     </select>
                 </div>
-                <div class="input-group">
-                    <label class="label-style">Status</label>
+                <div class="input-card flex-1">
+                    <label class="label-text">Status</label>
                     <select name="guest">
                         <option value="Solo">Solo</option>
                         <option value="+1 Guest">+1 Guest</option>
@@ -97,51 +103,4 @@
                 </div>
             </div>
 
-            <div class="input-group">
-                <label class="label-style">Room Setup?</label>
-                <select name="room">
-                    <option value="No Room Needed">No Room Needed</option>
-                    <option value="Share a Room">Share a Room</option>
-                    <option value="Room Alone">Room Alone</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label class="label-style">Dietary Restrictions</label>
-                <select name="diet">
-                    <option value="None">None</option>
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="No Fish">No Fish</option>
-                    <option value="Vegan">Vegan</option>
-                </select>
-            </div>
-
-            <div class="warning-box">
-                <p class="text-[10px] font-black uppercase text-amber-700 mb-1">⚠️ Note on Drinks</p>
-                <p class="text-xs text-amber-900 leading-relaxed">
-                    Water, soft drinks, and <b>Beer</b> are provided. Please bring your own <b>Whiskey or Wine</b> if you wish.
-                </p>
-            </div>
-
-            <div class="input-group">
-                <label class="label-style">Drink Preferences</label>
-                <textarea name="drink_pref" rows="2" placeholder="What brands do you prefer?"></textarea>
-            </div>
-
-            <div class="input-group">
-                <label class="label-style">Allergies / Questions</label>
-                <textarea name="allergies" rows="2" placeholder="Any specific food allergies?"></textarea>
-            </div>
-
-            <button type="submit" class="done-button shadow-lg shadow-blue-200 uppercase tracking-widest">
-                Done
-            </button>
-        </form>
-
-        <p class="text-center text-[9px] font-bold text-slate-300 mt-8 uppercase tracking-widest italic">
-            Engineered by Frank Fru
-        </p>
-    </div>
-
-</body>
-</html>
+            <div

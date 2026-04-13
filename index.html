@@ -3,93 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCAST 95/97 - 30th Anniversary Reunion</title>
+    <title>WonderWay | CCAST 95/97 Reunion Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8fafc; }
-        .form-card { background: white; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .btn-primary { background-color: #1e3a8a; color: white; transition: background 0.3s; }
-        .btn-primary:hover { background-color: #172554; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Outfit:wght@200;400;800&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; 
+            color: white; 
+            scroll-behavior: smooth; 
+        }
+        
+        .hero-font { font-family: 'Outfit', sans-serif; }
+        
+        .active-tab { 
+            background: #fbbf24 !important; 
+            color: black !important; 
+            border-color: #fbbf24 !important; 
+        }
+        
+        .package-card { 
+            transition: all 0.3s ease; 
+            border: 1px solid #1e293b; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            background: rgba(30, 41, 59, 0.4); 
+            backdrop-filter: blur(10px);
+        }
+        
+        .package-card:hover { 
+            transform: translateY(-5px); 
+            border-color: #fbbf24; 
+            box-shadow: 0 10px 30px -15px rgba(251, 191, 36, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
-<body class="min-h-screen py-12 px-4 flex flex-col items-center">
+<body class="pt-24">
 
-    <div class="mb-8 text-center">
-        <img src="images/logo.png" alt="CCAST 95/97 Logo" class="w-64 md:w-80 mx-auto mb-4 drop-shadow-lg">
-        <h1 class="text-3xl font-bold text-blue-900">Class Reunion RSVP</h1>
-        <p class="text-gray-600 mt-2">📍 Secret 95/97 | Kribi, Cameroon</p>
-    </div>
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-slate-800">
+        <div class="flex items-center gap-3">
+            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-yellow-500 bg-white flex items-center justify-center shadow-lg">
+                <img src="images/logo.png" alt="CCAST 95/97 Logo" class="w-full h-full object-contain p-1">
+            </div>
+            <div class="flex flex-col">
+                <span class="font-bold text-lg tracking-tighter uppercase hero-font text-white leading-none">WonderWay</span>
+                <span class="text-[10px] text-yellow-500 font-black tracking-widest uppercase">CCAST 95/97 Special</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
+            <a href="#" class="hover:text-yellow-500 transition">Experience</a>
+            <a href="#" class="hover:text-yellow-500 transition">Packages</a>
+            <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="px-5 py-2 border border-yellow-500 rounded-full hover:bg-yellow-500 hover:text-black transition">Book Now</a>
+        </div>
+    </nav>
 
-    <div class="form-card w-full max-w-lg p-8">
-        <form id="rsvpForm" class="space-y-6">
+    <header class="pt-20 pb-12 px-6 text-center">
+        <div class="inline-block px-4 py-1 border border-yellow-500/30 rounded-full mb-6">
+            <span class="text-[10px] font-black uppercase tracking-[0.4em] text-yellow-500">30th Anniversary Reunion</span>
+        </div>
+        <h1 class="hero-font text-5xl md:text-8xl font-black uppercase mb-4 tracking-tighter">
+            The Kribi <span class="gradient-text">Collection</span>
+        </h1>
+        <p class="max-w-2xl mx-auto text-slate-400 text-sm md:text-base mb-10 italic leading-relaxed">
+            "Luxury experiences curated specifically for the CCAST Class of 95/97 bold travelers."
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="switchCategory('activities')" id="tab-activities" class="tab-btn active-tab px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Activities</button>
+            <button onclick="switchCategory('couples')" id="tab-couples" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Couples</button>
+            <button onclick="switchCategory('group4')" id="tab-group4" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 4</button>
+            <button onclick="switchCategory('group6')" id="tab-group6" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Group of 6</button>
+            <button onclick="switchCategory('events')" id="tab-events" class="tab-btn px-6 py-3 rounded-xl border border-slate-700 font-bold text-[10px] uppercase tracking-widest transition">Event Escape</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div id="package-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </main>
+
+    <footer class="relative min-h-[600px] flex items-center justify-center py-32 px-6 overflow-hidden text-center mt-20 bg-slate-900">
+        <div class="absolute inset-0 z-0">
+            <img src="images/footer.jpg" alt="Founder" class="w-full h-full object-cover object-top opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-yellow-500 overflow-hidden">
+                <img src="images/logo.png" alt="CCAST Logo Small" class="w-full h-full object-contain p-2 bg-white">
+            </div>
+            <h3 class="hero-font text-3xl font-black uppercase mb-2 tracking-tighter text-white">Direct from the Founder</h3>
+            <p class="text-yellow-500 font-bold text-xs uppercase tracking-[0.3em] mb-8">Personalized Service & Trust</p>
             
-            <div>
-                <label class="block font-semibold mb-2">Attending?</label>
-                <select name="attendance" class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500" required>
-                    <option value="">Select an option</option>
-                    <option value="Yes">Yes, I'm coming!</option>
-                    <option value="No">No, I can't make it</option>
-                    <option value="Maybe">Maybe</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block font-semibold mb-2">Guest Status</label>
-                <div class="flex gap-4">
-                    <label class="flex items-center gap-2"><input type="radio" name="partner" value="Solo" checked> Solo</label>
-                    <label class="flex items-center gap-2"><input type="radio" name="partner" value="+1 Guest"> +1 Guest</label>
+            <p class="text-slate-200 text-sm md:text-base mb-10 italic leading-relaxed">
+                "Our mission is to make Kribi's luxury accessible. By letting you choose your own transport, we keep these curated experiences affordable for everyone, especially for our 95/97 brothers and sisters."
+            </p>
+            
+            <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" 
+               class="inline-block px-10 py-4 bg-yellow-500 text-black font-black rounded-full uppercase text-xs tracking-widest hover:bg-white transition-all shadow-xl hover:scale-105 transform">
+               Book Your 30th Anniversary Escape
+            </a>
+            
+            <div class="mt-16 pt-8 border-t border-white/10">
+                <div class="flex justify-center gap-6 mb-4 text-xl">
+                    <a href="https://www.tiktok.com/@wonderway_tour_cameroon" target="_blank" class="text-white/40 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/wanderway_tour_cameroon" target="_blank" class="text-white/40 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1BF6J9sik8/" class="text-white/40 hover:text-white transition"><i class="fab fa-facebook"></i></a>
                 </div>
+                <p class="text-white/40 text-[10px] uppercase tracking-widest font-bold">
+                    &copy; 2026 WonderWay Tours. Engineered by Frank Fru.
+                </p>
             </div>
-
-            <div>
-                <label class="block font-semibold mb-2">Room Setup?</label>
-                <select name="room" class="w-full border p-3 rounded-lg">
-                    <option value="No Room Needed">No Room Needed</option>
-                    <option value="Share a Room">Share a Room</option>
-                    <option value="Room Alone">Room Alone</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block font-semibold mb-2">Dietary Restrictions</label>
-                <select name="diet" class="w-full border p-3 rounded-lg">
-                    <option value="None">No Dietary Restrictions</option>
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="No Fish">No Fish</option>
-                    <option value="Vegan">Vegan</option>
-                </select>
-            </div>
-
-            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 text-sm text-amber-800">
-                <strong>⚠️ Note on Drinks:</strong> Water, soft drinks, and Beer provided. Please bring your own Whiskey or Wine if you wish.
-            </div>
-
-            <button type="submit" id="submitBtn" class="w-full btn-primary font-bold py-3 rounded-lg shadow-md">
-                Confirm RSVP
-            </button>
-        </form>
-    </div>
-
-    <footer class="mt-8 text-gray-500 text-sm italic">
-        Engineered by Frank Fru
+        </div>
     </footer>
 
     <script>
-        const form = document.getElementById('rsvpForm');
-        const btn = document.getElementById('submitBtn');
+        const categories = {
+            activities: [
+                { tier: "Single", name: "Jet Ski Adventure", price: "10,000 CFA", img: "images/jetski-action.jpg", features: ["15 Mins High-Speed", "Safety Instructor", "Life Jacket Included"] },
+                { tier: "Single", name: "Horse Riding", price: "2,000 CFA", img: "images/horse-riding.jpg", features: ["Sunset Beach Ride", "Guided Tour", "Photo Sessions"] },
+                { tier: "Single", name: "Quad Biking", price: "5,000 CFA", img: "images/Quad.jpg", features: ["Beach Trail Ride", "All-Terrain Gear"] },
+                { tier: "Single", name: "Sip & Paint", price: "15,000 CFA", img: "images/sip-paint.jpg", features: ["Creative Session", "Complimentary Drink", "Art Supplies"] },
+                { tier: "Single", name: "Museum Visit", price: "2,000 CFA", img: "images/museum.jpg", features: ["Cultural Heritage", "English/French Guide"] }
+            ],
+            couples: [
+                { tier: "Silver", name: "Mini Love Adventure", price: "90,000 CFA", img: "images/couple paradis escape.jpg", features: ["2 Days Lodging", "Jet ski & Quad", "Museum & Lobe Falls", "Content Creation"] },
+                { tier: "Gold", name: "Paradise Escape", price: "250,000 CFA", img: "images/sip-paint.jpg", features: ["Includes Silver", "Romantic Dinner", "Private Beach Fire"] },
+                { tier: "Premium", name: "Royal Romance", price: "350,000 CFA", img: "images/royal romance.jpg", features: ["Includes Gold", "Private Boat Cruise", "Seaport Visit"] }
+            ],
+            group4: [
+                { tier: "Silver", name: "Crew Chill", price: "230,000 CFA", img: "images/group-action.jpg", features: ["Group Lodging", "Jet Ski Sessions", "Waterfall Tour"] },
+                { tier: "Gold", name: "Vibes & Memories", price: "350,000 CFA", img: "images/dinner-setup.jpg", features: ["Includes Silver", "Group Dinner", "Sip & Paint"] },
+                { tier: "Premium", name: "VIP Elite", price: "420,000 CFA", img: "images/seaport visit.jpg", features: ["Includes Gold", "Luxury Boat Cruise", "Premium Entry"] }
+            ],
+            group6: [
+                { tier: "Silver", name: "Friends & Waves", price: "270,000 CFA", img: "images/group-action.jpg", features: ["Group Villa", "Water Sports", "Guide Included"] },
+                { tier: "Gold", name: "Golden Getaway", price: "440,000 CFA", img: "images/sip-paint.jpg", features: ["Includes Silver", "Full Catering", "Bonfire Night"] },
+                { tier: "Platinum", name: "Paradise Circle", price: "530,000 CFA", img: "images/royal romance.jpg", features: ["Full VIP Access", "Private Boat", "Executive Seaport Tour"] }
+            ],
+            events: [
+                { tier: "Custom", name: "Beachside Wedding", price: "Inquire", img: "images/group-action.jpg", features: ["Themed Decoration", "Cake & Music", "Catering Service"] },
+                { tier: "Corporate", name: "Company Retreat", price: "Inquire", img: "images/group-boat.jpg", features: ["Team Building", "Workshop Space", "Group Catering"] },
+                { tier: "Custom", name: "Private Party", price: "Inquire", img: "images/dinner-setup.jpg", features: ["DJ & Sound System", "Beach Bonfire", "Event Photography"] }
+            ]
+        };
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            btn.disabled = true;
-            btn.innerText = "Saving...";
+        function switchCategory(cat) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+            document.getElementById('tab-' + cat).classList.add('active-tab');
             
-            // Logic to connect to your Google Apps Script URL would go here
-            alert("RSVP Recorded Locally! Ensure your Script URL is connected.");
+            const grid = document.getElementById('package-grid');
+            const data = categories[cat];
             
-            btn.disabled = false;
-            btn.innerText = "Confirm RSVP";
-        });
+            grid.innerHTML = data.map(item => `
+                <div class="package-card">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80'">
+                        <div class="absolute top-4 left-4 bg-yellow-500 text-black font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-widest shadow-xl">${item.tier}</div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h4 class="text-2xl font-black mb-1 uppercase hero-font leading-tight tracking-tighter text-white">${item.name}</h4>
+                        <p class="text-xl font-bold mb-6 text-yellow-500">${item.price}</p>
+                        <div class="w-10 h-1 bg-yellow-500/30 mb-6 rounded-full"></div>
+                        <ul class="space-y-3 mb-8 flex-grow">
+                            ${item.features.map(f => '<li class="text-xs text-slate-400 flex items-center gap-2 font-semibold"><i class="fas fa-arrow-right text-yellow-500/50 text-[8px]"></i> ' + f + '</li>').join('')}
+                        </ul>
+                        <a href="https://linktr.ee/wonderwaytourkribi" target="_blank" class="w-full py-4 bg-white/5 border border-white/10 text-white font-black rounded-xl uppercase text-[10px] tracking-widest hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition-all text-center">Inquire Now</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        window.onload = () => switchCategory('activities');
     </script>
-
 </body>
 </html>

@@ -19,8 +19,19 @@
             border-radius: 32px;
             width: 100%;
             max-width: 450px;
-            padding: 2rem;
+            /* overflow-hidden keeps the image corners rounded to match the card */
+            overflow: hidden; 
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .form-content {
+            padding: 1.5rem 2rem 2rem 2rem;
         }
 
         .input-card {
@@ -69,38 +80,50 @@
             border-radius: 18px;
             width: 100%;
             transition: all 0.2s;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
         .done-btn:active { transform: scale(0.98); }
-        .done-btn:disabled { background-color: #94a3b8; cursor: not-allowed; }
+        .done-btn:disabled { background-color: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 py-12">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 py-8">
 
     <div class="form-container">
         
-        <div class="flex justify-center mb-6">
-            <img src="images/logo.png" alt="CCAST 95/97 Logo" class="w-40 h-auto object-contain">
-        </div>
+        <img src="images/logo.png" alt="CCAST 95/97 Reunion" class="header-image">
 
-        <form id="rsvp-form">
-            <div class="flex gap-3">
-                <div class="input-card flex-1">
-                    <label class="label-text">Attending?</label>
-                    <select name="attendance" required>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Maybe">Maybe</option>
+        <div class="form-content">
+            <h1 class="text-center text-xl font-black text-blue-900 uppercase tracking-tight mb-6">30th Anniversary RSVP</h1>
+
+            <form id="rsvp-form">
+                <div class="flex gap-3">
+                    <div class="input-card flex-1">
+                        <label class="label-text">Attending?</label>
+                        <select name="attendance" required>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Maybe">Maybe</option>
+                        </select>
+                    </div>
+                    <div class="input-card flex-1">
+                        <label class="label-text">Status</label>
+                        <select name="guest">
+                            <option value="Solo">Solo</option>
+                            <option value="+1 Guest">+1 Guest</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-card">
+                    <label class="label-text">Room Setup?</label>
+                    <select name="room">
+                        <option value="No Room Needed">No Room Needed</option>
+                        <option value="Share a Room">Share a Room</option>
+                        <option value="Room Alone">Room Alone</option>
                     </select>
                 </div>
-                <div class="input-card flex-1">
-                    <label class="label-text">Status</label>
-                    <select name="guest">
-                        <option value="Solo">Solo</option>
-                        <option value="+1 Guest">+1 Guest</option>
-                    </select>
-                </div>
-            </div>
 
-            <div
+                <div class="input-card">
+                    <label class="label-text">Dietary Restrictions</label>
+                    <select name="diet">
+                        <option value="None">No Dietary Restrictions</option

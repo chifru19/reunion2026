@@ -16,8 +16,9 @@
         .label-text { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; display: block; margin-bottom: 4px; }
         select, textarea, input { width: 100%; background: transparent; outline: none; font-size: 16px; font-weight: 600; color: #1e293b; border: none; resize: none; }
         .note-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem; }
-        .done-btn { background-color: #2563eb; color: white; font-weight: 800; text-transform: uppercase; padding: 1.25rem; border-radius: 18px; width: 100%; transition: all 0.2s; margin-top: 0.5rem; }
-        .success-box { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #166534; padding: 0.75rem; border-radius: 12px; text-align: center; font-weight: 700; display: none; margin-top: 1rem; }
+        .done-btn { background-color: #2563eb; color: white; font-weight: 800; text-transform: uppercase; padding: 1.25rem; border-radius: 18px; width: 100%; transition: all 0.2s; margin-top: 0.5rem; cursor: pointer; }
+        .done-btn:disabled { background-color: #94a3b8; cursor: not-allowed; }
+        .success-box { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #166534; padding: 1.25rem; border-radius: 18px; text-align: center; font-weight: 700; display: none; margin-top: 1rem; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start">
@@ -55,7 +56,7 @@
                         </select>
                     </div>
                     <div class="input-card flex-1">
-                        <label class="label-text">Partner Status</label>
+                        <label class="label-text">Status</label>
                         <select name="partner">
                             <option value="Solo">Solo</option>
                             <option value="+1 Guest">+1 Guest</option>
@@ -90,12 +91,12 @@
 
                 <div class="input-card">
                     <label class="label-text">Drink Preference & Pledge</label>
-                    <textarea name="beverage_choice" rows="2" placeholder="Drink preferences & what extra drinks are you bringing (pledge)?"></textarea>
+                    <textarea name="beverage_choice" rows="2" placeholder="What extra drinks are you bringing?"></textarea>
                 </div>
 
                 <div class="input-card">
-                    <label class="label-text">Any other questions?</label>
-                    <textarea name="questions" rows="2" placeholder="Allergies or questions?"></textarea>
+                    <label class="label-text">Allergies or Questions?</label>
+                    <textarea name="questions" rows="2" placeholder="Any additional info?"></textarea>
                 </div>
 
                 <button type="submit" class="done-btn" id="submitBtn">DONE</button>
@@ -107,14 +108,15 @@
     <div class="mt-8 text-center text-white/50 text-[10px] uppercase tracking-widest font-bold">
         <p>ENGINEERED BY FRANK FRU</p>
         <div class="flex gap-4 justify-center mt-2 opacity-50">
-            <a href="https://frankfru.com">Portfolio</a>
-            <a href="https://github.com/chifru19">GitHub</a>
-            <a href="https://linkedin.com/in/frank-fru/">LinkedIn</a>
+            <a href="https://frankfru.com" class="hover:text-white">Portfolio</a>
+            <a href="https://github.com/chifru19" class="hover:text-white">GitHub</a>
+            <a href="https://linkedin.com/in/frank-fru/" class="hover:text-white">LinkedIn</a>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcCtV0iBX_IMHCoOx-bRBRls5AxywaZLynwbRqydBlPhADA_X8G/exec';
+        // Updated URL provided by the user
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wCtVOiBX_lMHCoOx-bRBRIs5AxYwaZLynwbRqydBlPhADA-Sfon/exec';
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
         const msg = document.getElementById('successMsg');
@@ -124,16 +126,22 @@
             btn.disabled = true;
             btn.innerText = 'SENDING...';
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    btn.style.display = 'none';
-                    msg.style.display = 'block';
-                })
-                .catch(error => {
-                    btn.disabled = false;
-                    btn.innerText = 'DONE';
-                    console.error('Error!', error.message);
-                });
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form),
+                mode: 'no-cors' 
+            })
+            .then(() => {
+                btn.style.display = 'none';
+                msg.style.display = 'block';
+                form.reset();
+            })
+            .catch(error => {
+                btn.disabled = false;
+                btn.innerText = 'DONE';
+                console.error('Error!', error.message);
+                alert('Submission failed. Please check your internet connection.');
+            });
         });
     </script>
 </body>

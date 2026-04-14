@@ -115,7 +115,7 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz95ruDL7fdFSM1aOlwY0z2jsW-DejnCVP-EtU-zSOUlQfRTKu-OpAyurV_ki6lAXrL/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyxyPiHIIuUWL_T2ROn2-Nd0O1uTkVOdrmqtMFDh3kJJ3n9AhKkKT-oQIfvYviOItkj/exec';
         
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
@@ -126,7 +126,6 @@
             btn.disabled = true;
             btn.innerText = 'SENDING...';
 
-            // Send as FormData for reliability with standard doPost logic
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: new FormData(form),

@@ -115,8 +115,9 @@
     </div>
 
     <script>
-        // The updated Web App URL from your screenshot
+        // Updated Web App URL from Version 11 Deployment
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wCtVOiBX_lMHCoOx-bRBRIs5AxYwaZLynwbRqydBlPhADA-Sfon/exec';
+        
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
         const msg = document.getElementById('successMsg');
@@ -129,7 +130,7 @@
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: new FormData(form),
-                mode: 'no-cors' // Added to handle browser security blocks
+                mode: 'no-cors' 
             })
             .then(() => {
                 btn.style.display = 'none';

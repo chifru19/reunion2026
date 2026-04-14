@@ -72,13 +72,11 @@
                 </div>
 
                 <div class="input-card">
-                    <label class="label-text">Drink Preference & Pledge</label>
-                    <textarea name="pledge" rows="2" placeholder="What type of drink do you prefer? & What are you bringing (pledge)?"></textarea>
+                    <textarea name="pledge" rows="2" placeholder="Drink preferences & what extra drinks are you bringing (pledge)?"></textarea>
                 </div>
 
                 <div class="input-card">
-                    <label class="label-text">Allergies or questions?</label>
-                    <textarea name="questions" rows="2" placeholder="Any specific food allergies or questions?"></textarea>
+                    <textarea name="questions" rows="2" placeholder="Allergies or questions?"></textarea>
                 </div>
 
                 <button type="submit" class="done-btn" id="submitBtn">DONE</button>
@@ -88,16 +86,11 @@
     </div>
 
     <div class="mt-8 text-center text-white/50 text-[10px] uppercase tracking-widest font-bold">
-        <p>Engineered by Frank Fru</p>
-        <div class="flex gap-4 justify-center mt-2 opacity-50">
-            <a href="https://frankfru.com">Portfolio</a>
-            <a href="https://github.com/chifru19">GitHub</a>
-            <a href="https://linkedin.com/in/frank-fru/">LinkedIn</a>
-        </div>
+        <p>ENGINEERED BY FRANK FRU</p>
     </div>
 
     <script>
-        const scriptURL = 'HIER_DEINE_WEB_APP_URL';
+        const scriptURL = 'HIER_DEINE_APPS_SCRIPT_URL';
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
         const msg = document.getElementById('successMsg');
@@ -115,7 +108,7 @@
                 .catch(error => {
                     btn.disabled = false;
                     btn.innerText = 'DONE';
-                    alert('Error! Please try again.');
+                    console.error('Error!', error.message);
                 });
         });
     </script>

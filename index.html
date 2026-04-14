@@ -95,8 +95,8 @@
                 </div>
 
                 <div class="input-card">
-                    <label class="label-text">Allergies or Questions?</label>
-                    <textarea name="questions" rows="2" placeholder="Any additional info?"></textarea>
+                    <label class="label-text">Any other questions?</label>
+                    <textarea name="questions" rows="2" placeholder="Allergies or questions?"></textarea>
                 </div>
 
                 <button type="submit" class="done-btn" id="submitBtn">DONE</button>
@@ -108,14 +108,14 @@
     <div class="mt-8 text-center text-white/50 text-[10px] uppercase tracking-widest font-bold">
         <p>ENGINEERED BY FRANK FRU</p>
         <div class="flex gap-4 justify-center mt-2 opacity-50">
-            <a href="https://frankfru.com" class="hover:text-white">Portfolio</a>
-            <a href="https://github.com/chifru19" class="hover:text-white">GitHub</a>
-            <a href="https://linkedin.com/in/frank-fru/" class="hover:text-white">LinkedIn</a>
+            <a href="https://frankfru.com">Portfolio</a>
+            <a href="https://github.com/chifru19">GitHub</a>
+            <a href="https://linkedin.com/in/frank-fru/">LinkedIn</a>
         </div>
     </div>
 
     <script>
-        // Updated URL provided by the user
+        // The updated Web App URL from your screenshot
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wCtVOiBX_lMHCoOx-bRBRIs5AxYwaZLynwbRqydBlPhADA-Sfon/exec';
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
@@ -129,7 +129,7 @@
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: new FormData(form),
-                mode: 'no-cors' 
+                mode: 'no-cors' // Added to handle browser security blocks
             })
             .then(() => {
                 btn.style.display = 'none';
@@ -140,7 +140,7 @@
                 btn.disabled = false;
                 btn.innerText = 'DONE';
                 console.error('Error!', error.message);
-                alert('Submission failed. Please check your internet connection.');
+                alert('There was an error. Please try again.');
             });
         });
     </script>

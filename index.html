@@ -14,7 +14,7 @@
         .form-content { padding: 1.5rem 1.5rem 2rem 1.5rem; }
         .input-card { background: #f8fafc; border-radius: 16px; padding: 1rem 1.25rem; margin-bottom: 1rem; border: 1px solid #e2e8f0; }
         .label-text { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; display: block; margin-bottom: 4px; }
-        select, textarea { width: 100%; background: transparent; outline: none; font-size: 16px; font-weight: 600; color: #1e293b; border: none; resize: none; }
+        select, textarea, input { width: 100%; background: transparent; outline: none; font-size: 16px; font-weight: 600; color: #1e293b; border: none; resize: none; }
         .note-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem; }
         .done-btn { background-color: #2563eb; color: white; font-weight: 800; text-transform: uppercase; padding: 1.25rem; border-radius: 18px; width: 100%; transition: all 0.2s; margin-top: 0.5rem; }
         .success-box { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #166534; padding: 0.75rem; border-radius: 12px; text-align: center; font-weight: 700; display: none; margin-top: 1rem; }
@@ -29,17 +29,34 @@
             <h2 class="text-center text-xl font-black text-blue-900 uppercase tracking-tight mb-6">30th Anniversary RSVP</h2>
 
             <form id="rsvpForm">
-                <div class="flex gap-3 mb-1">
+                <div class="input-card">
+                    <label class="label-text">Full Name</label>
+                    <input type="text" name="name" required placeholder="Your Name">
+                </div>
+
+                <div class="flex gap-3">
+                    <div class="input-card flex-1">
+                        <label class="label-text">Email</label>
+                        <input type="email" name="email" required placeholder="email@address.com">
+                    </div>
+                    <div class="input-card flex-1">
+                        <label class="label-text">Phone</label>
+                        <input type="tel" name="phone" required placeholder="Phone Number">
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
                     <div class="input-card flex-1">
                         <label class="label-text">Attending?</label>
                         <select name="attendance" required>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
-                            <option value="Maybe">Maybe</option> </select>
+                            <option value="Maybe">Maybe</option>
+                        </select>
                     </div>
                     <div class="input-card flex-1">
-                        <label class="label-text">Status</label>
-                        <select name="status">
+                        <label class="label-text">Partner Status</label>
+                        <select name="partner">
                             <option value="Solo">Solo</option>
                             <option value="+1 Guest">+1 Guest</option>
                         </select>
@@ -48,7 +65,7 @@
 
                 <div class="input-card">
                     <label class="label-text">Room Setup?</label>
-                    <select name="room">
+                    <select name="room_preference">
                         <option value="No Room Needed">No Room Needed</option>
                         <option value="Share a Room">Share a Room</option>
                         <option value="Room Alone">Room Alone</option>
@@ -57,7 +74,7 @@
 
                 <div class="input-card">
                     <label class="label-text">Dietary Restrictions</label>
-                    <select name="diet">
+                    <select name="dietary">
                         <option value="No Dietary Restrictions">No Dietary Restrictions</option>
                         <option value="Vegetarian">Vegetarian</option>
                         <option value="Vegan">Vegan</option>
@@ -72,10 +89,12 @@
                 </div>
 
                 <div class="input-card">
-                    <textarea name="pledge" rows="2" placeholder="Drink preferences & what extra drinks are you bringing (pledge)?"></textarea>
+                    <label class="label-text">Drink Preference & Pledge</label>
+                    <textarea name="beverage_choice" rows="2" placeholder="Drink preferences & what extra drinks are you bringing (pledge)?"></textarea>
                 </div>
 
                 <div class="input-card">
+                    <label class="label-text">Any other questions?</label>
                     <textarea name="questions" rows="2" placeholder="Allergies or questions?"></textarea>
                 </div>
 
@@ -95,7 +114,7 @@
     </div>
 
     <script>
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwqbje4EwU5F1Zu0wcCtV0iBX_IMHCoOx-bRBRls5AxywaZLynwbRqydBlPhADA_X8G/exec';
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('submitBtn');
         const msg = document.getElementById('successMsg');
